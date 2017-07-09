@@ -1,0 +1,10 @@
+<header>
+  <img [src]="sanitize(this.avatar.profileImage)" class="profile-image">
+  <div class="header-user">
+    <div class="title">{{ avatar.name || "User name" }}</div>
+    <div class="connection-status">{{connectionStatus}}</div>
+  </div>
+  <!-- <button class="new-chat">
+    <i class="material-icons new-chat">chat</i>
+  </button> -->
+</header>
