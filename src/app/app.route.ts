@@ -5,6 +5,7 @@ import { AvatarComponent } from './avatar/avatar.component';
 
 import { AvatarGuard } from './service/avatar.guard';
 import { MessengerComponent } from './messenger/messenger.component';
+import { ChatPaneComponent } from './chat-pane/chat_pane.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,13 @@ import { MessengerComponent } from './messenger/messenger.component';
       {
         path: '',
         canActivate: [AvatarGuard],
-        component: MessengerComponent
+        component: MessengerComponent,
+        children: [
+          {
+            path: 'chat',
+            component: ChatPaneComponent
+          }
+        ]
       },
       {
         path: 'get-avatar',

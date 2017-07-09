@@ -5,7 +5,7 @@
 
 <div class="chat-history">
   <h5>Chat History</h5>
-  <div class="chat-item" *ngFor="let chatItem of chatList | chatFilter:searchString">
+  <div class="chat-item" [class.active]="chatItem.friendId == activeItemId" *ngFor="let chatItem of chatList | chatFilter:searchString" (click)="openChat(chatItem.friendId)">
     <div><img class="chat-item-image" [src]="sanitize(chatItem.friendAvatar.profileImage)"></div>
     <div class="chat-item-detail">
       <div class="chat-item-name">{{ chatItem.friendAvatar.name }}</div>
@@ -16,7 +16,7 @@
 
 <div class="chat-history" *ngIf="searchString && searchedFriends.length">
   <h5>Friends</h5>
-  <div class="chat-item" *ngFor="let item of searchedFriends">
+  <div class="chat-item" *ngFor="let item of searchedFriends" (click)="startNewChat(item.uuid)">
     <div><img class="chat-item-image" [src]="sanitize(item.avatar.profileImage)"></div>
     <div class="chat-item-detail">
       <div class="chat-item-name">{{ item.avatar.name }}</div>

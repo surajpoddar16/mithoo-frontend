@@ -7,8 +7,11 @@
   width: 100%;
   color: $dark_text_primary;
   cursor: pointer;
-  &:hover {
+  &:not(.active):hover {
     background: darken($color-secondary, 10%);
+  }
+  &.active {
+    background: darken($color-secondary, 20%);
   }
   .chat-item-image {
     width: 36px;

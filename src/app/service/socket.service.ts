@@ -37,6 +37,25 @@ export class SocketService {
     this.socket.emit('welcome_ping');
   }
 
+  sendMessage(data: any) {
+    this.socket.emit('message', data);
+  }
+
+  getTypingStatus() {
+    var self = this;
+    var observable = new Observable(function(observer: any) {
+      self.socket.on('typing', function(data: any) {
+        console.log(data);
+        observer.next(data);
+      });
+
+      return function() {
+      }
+    });
+
+    return observable;
+  }
+
   getMessage() {
     var self = this;
     var observable = new Observable(function(observer: any) {

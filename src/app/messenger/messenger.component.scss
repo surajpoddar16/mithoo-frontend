@@ -5,8 +5,13 @@ chat-list-panel {
   height: 100%;
 }
 
+chat-pane {
+  width: 70%;
+  height: 100%;
+}
+
 @media screen and (max-width: $screen-xs-max) {
-  chat-list-panel {
+  chat-list-panel, chat-pane {
     width: 100%;
   }
 }
@@ -14,5 +19,9 @@ chat-list-panel {
 @media screen and (max-width: $screen-sm-max) {
   chat-list-panel {
     width: 36%;
+  }
+
+  chat-pane {
+    width: 64%;
   }
 }

@@ -10,6 +10,7 @@ import { MessengerComponent } from './messenger/messenger.component';
 import { ChatListPanelComponent } from './chat-list-panel/chat_list_panel.component';
 import { ChatListHeaderComponent } from './chat-list-panel/chat-list-header/chat_list_header.component';
 import { ChatContactListComponent } from './chat-list-panel/chat-contact-list/chat_contact_list.component';
+import { ChatPaneComponent } from './chat-pane/chat_pane.component';
 
 import { UserService } from './service/user.service';
 import { AppConfig } from './service/app.config';
@@ -34,6 +35,7 @@ import { ChatFilterPipe } from './service/chat_filter.pipe';
     ChatListPanelComponent,
     ChatListHeaderComponent,
     ChatContactListComponent,
+    ChatPaneComponent,
     ChatFilterPipe
   ],
   providers: [
