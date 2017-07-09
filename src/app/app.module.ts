@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { AppRoutingModule } from './app.route';
+
 import { AppComponent } from './app.component';
 import { AvatarComponent } from './avatar/avatar.component';
-import { AppRoutingModule } from './app.route';
+import { MessengerComponent } from './messenger/messenger.component';
 
 import { UserService } from './service/user.service';
 import { AppConfig } from './service/app.config';
 import { ResponseService } from './service/response.service';
+import { AvatarGuard } from './service/avatar.guard';
 
 
 @NgModule({
@@ -18,12 +21,14 @@ import { ResponseService } from './service/response.service';
   ],
   declarations: [
     AppComponent,
-    AvatarComponent
+    AvatarComponent,
+    MessengerComponent
   ],
   providers: [
     UserService,
     AppConfig,
-    ResponseService
+    ResponseService,
+    AvatarGuard
   ],
   bootstrap: [ AppComponent ]
 })
