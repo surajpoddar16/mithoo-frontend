@@ -2,11 +2,34 @@
 <html>
   <head>
     <base href="/">
-    <title>Angular With Webpack - JIT, AOT, Universal</title>
+    <title>Mithoo - Real time messaging app</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .loading-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+      }
+      .loading-image {
+        width: 96px;
+        margin: auto;
+      }
+    </style>
   </head>
   <body>
-    <my-app>Loading...</my-app>
+    <my-app>
+      <div class="loading-container">
+        <svg class="loading-image" width="305px" height="113px" viewBox="166 175 305 113" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(166.000000, 175.000000)">
+            <path d="M84.7126523,9.31335502 C1.71265228,37.313355 -8.28734772,44.4581984 4.71265228,55.8857767 C17.7126523,67.313355 96.7772184,127.079308 110.777218,109.079308 C117.776443,98.1916256 107.712652,95.313355 136.712652,84.313355 C136.712652,81.313355 119.712652,49.313355 159.712652,33.313355 C190.712652,24.313355 210.712652,49.9373418 210.712652,55.8857767 C231.129955,47.9373418 281.400022,44.6723027 298.777218,38.0793076 C335.777218,24.0413228 167.712652,-18.686645 84.7126523,9.31335502 Z" id="Path" fill="#2196F3"></path>
+            <circle id="Oval" fill="#5C8886" cx="171" cy="65" r="18">
+              <animate id="fade_in" attributeName="opacity" from="0" to="1" dur="1s" begin="0s;fade_out.end" />
+              <animate id="fade_out" attributeName="opacity" from="1" to="0" dur="1s" begin="fade_in.end" />
+            </circle>
+          </g>
+        </svg>
+      </div>
+    </my-app>
   </body>
 </html>
