@@ -89,11 +89,11 @@ export class ChatContactListComponent implements OnInit, OnDestroy {
     this.searchTerms
       .debounceTime(300)
       .distinctUntilChanged()
-      .switchMap(function(term) {
+      .switchMap(function(term: any) {
         return term
           ? self.userService.getFriendsList(term)
-          : Observable.of<any[]>([])
-      }).subscribe(function(result) {
+          : Observable.of<any[]>([]);
+      }).subscribe(function(result: any) {
           self.searchedFriends = result.filter(function(item: any) {
             return self.chatList.findIndex((chatItem: any) => chatItem.friendId == item.uuid ) === -1;
           });
