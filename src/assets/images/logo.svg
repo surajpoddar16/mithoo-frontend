@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="296px" height="136px" viewBox="0 0 296 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard">
+            <g id="logo" transform="translate(6.000000, 21.000000)">
+                <path d="M78.7983399,8.02809149 C1.59308147,32.1640297 -7.7087569,38.322869 4.38363298,48.1734163 C16.4760229,58.0239636 90.0206043,109.542083 103.043178,94.0261226 C109.553743,84.6409647 100.192568,82.1599018 127.167899,72.6779261 C127.167899,70.0919327 111.354774,42.5080033 148.562128,28.7160386 C177.397827,20.9580584 196.001503,43.0458785 196.001503,48.1734163 C214.993348,41.3218829 261.753752,38.5074264 277.917739,32.8242792 C312.334541,20.7235672 156.003598,-16.1078468 78.7983399,8.02809149 Z" id="Path" fill="#2196F3"></path>
+                <ellipse id="Oval" fill="#5C8886" cx="159.061436" cy="56.0298567" rx="16.7433091" ry="15.5159603"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>
