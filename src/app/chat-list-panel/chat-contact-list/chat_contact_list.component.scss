@@ -1,0 +1,76 @@
+@import "../../../assets/sass/variables.scss";
+
+.chat-item {
+  display: flex;
+  flex-direction: row;
+  padding: $default-padding/2 $default-padding;
+  width: 100%;
+  color: $dark_text_primary;
+  cursor: pointer;
+  &:hover {
+    background: darken($color-secondary, 10%);
+  }
+  .chat-item-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    margin-right: ($default-padding * 3) / 2;
+    background: rgba(0, 0, 0, .3);
+    overflow: hidden;
+  }
+
+  .chat-item-msg {
+    font-size: 13px;
+    color: $dark_text_primary;
+    margin-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    &.seen {
+      font-weight: 400;
+      color: $dark_text_secondary;
+    }
+  }
+
+  .chat-item-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .chat-item-detail {
+    min-width: 0px;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+}
+
+h5 {
+  text-transform: uppercase;
+  color: $dark_text_secondary;
+  padding: $default-padding/2 $default-padding;
+}
+
+.chat-history {
+  margin-top: 30px;
+}
+
+.chat-search {
+  display: flex;
+  padding: $default-padding/2 $default-padding;
+  color: $dark_text_primary;
+  i {
+    margin-right: 10px;
+  }
+  input {
+    padding: 0px;
+    flex-grow: 1;
+    font-size: 14px;
+    background: none;
+    border: none;
+    color: $dark_text_primary;
+    outline: none;
+    &::placeholder {
+      color: $dark_text_secondary;
+    }
+  }
+}

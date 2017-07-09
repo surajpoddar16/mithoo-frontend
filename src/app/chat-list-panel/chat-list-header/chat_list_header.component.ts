@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SocketService } from '../../service/socket.service';
@@ -8,7 +8,7 @@ import { SocketService } from '../../service/socket.service';
   templateUrl: './chat_list_header.component.html',
   styleUrls: ['./chat_list_header.component.scss']
 })
-export class ChatListHeaderComponent {
+export class ChatListHeaderComponent implements OnInit, OnDestroy {
   avatar: any;
   connectionStatus: any = "Offline";
   connection: any;

@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { AppConfig } from './app.config';
 import { ResponseService } from './response.service';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserService {
@@ -12,6 +14,7 @@ export class UserService {
     private http: Http) { }
 
   getAvatarUrl = this.appConfig.baseUrl + '/user/avatar';
+  getFriendsUrl = this.appConfig.baseUrl + '/user/friends';
 
   defaultHeaders = new Headers({ 'Content-Type': 'application/json' });
 
@@ -33,5 +36,20 @@ export class UserService {
   getAvatarFromLocalStorage() {
     var avatar = localStorage.getItem('avatar');
     return avatar ? JSON.parse(avatar) : {};
+  }
+
+  getFriendsList(search: string): Observable<any> {
+    let options = new RequestOptions({ headers: this.defaultHeaders });
+    let url = this.getFriendsUrl;
+
+    if (search) {
+      url += `?search=${search}`;
+    }
+
+    return this.http
+      .get(url, options)
+      .map(function(res) {
+        return res.json().data;
+      });
   }
 }

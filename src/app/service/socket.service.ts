@@ -18,14 +18,30 @@ export class SocketService {
   getConnectionStatus() {
     var self = this;
     var observable = new Observable(function(observer: any) {
-      self.connect();
-
       self.socket.on('connect', function() {
         observer.next('Online');
       });
 
       self.socket.on('disconnect', function() {
         observer.next('Offline');
+      });
+
+      return function() {
+      }
+    });
+
+    return observable;
+  }
+
+  sendWelcomePing() {
+    this.socket.emit('welcome_ping');
+  }
+
+  getMessage() {
+    var self = this;
+    var observable = new Observable(function(observer: any) {
+      self.socket.on('message', function(data: any) {
+        observer.next(data);
       });
 
       return function() {

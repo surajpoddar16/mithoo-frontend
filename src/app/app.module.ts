@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app.route';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AvatarComponent } from './avatar/avatar.component';
@@ -15,13 +16,16 @@ import { AppConfig } from './service/app.config';
 import { ResponseService } from './service/response.service';
 import { AvatarGuard } from './service/avatar.guard';
 import { SocketService } from './service/socket.service';
+import { StorageService } from './service/storage.service';
+import { ChatFilterPipe } from './service/chat_filter.pipe';
 
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
@@ -29,14 +33,16 @@ import { SocketService } from './service/socket.service';
     MessengerComponent,
     ChatListPanelComponent,
     ChatListHeaderComponent,
-    ChatContactListComponent
+    ChatContactListComponent,
+    ChatFilterPipe
   ],
   providers: [
     UserService,
     AppConfig,
     ResponseService,
     AvatarGuard,
-    SocketService
+    SocketService,
+    StorageService
   ],
   bootstrap: [ AppComponent ]
 })
