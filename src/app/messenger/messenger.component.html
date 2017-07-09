@@ -1,3 +1,4 @@
 <div class="app-content">
-  <chat-list-panel></chat-list-panel>
+  <chat-list-panel (select)="setActiveChatPane($event)"></chat-list-panel>
+  <chat-pane [activeChat]="activeChat"></chat-pane>
 </div>

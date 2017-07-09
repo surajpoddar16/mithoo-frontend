@@ -1,1 +1,28 @@
-<div class="chat-pane-container"></div>
+<div class="chat-pane-container" *ngIf="contactData">
+  <header>
+    <div><img class="contact-image" [src]="sanitize(contactData.avatar.profileImage)"></div>
+    <div class="contact-detail">
+      <div class="contact-name">{{ contactData.avatar.name }}</div>
+      <div class="connection-status">{{ 'Online' }}</div>
+    </div>
+  </header>
+  <div #messageBox class="messages-area">
+    <div class="message" *ngFor="let item of chatData" [class.friend]="isSenderFriend(item)">
+      {{ item.message }}
+    </div>
+
+    <div class="message friend typing" *ngIf="isTyping">
+      <div class="typing-spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+    </div>
+  </div>
+  <div class="input-area">
+    <form (ngSubmit)="sendMessage()" name="new-message-form">
+      <input type="text" class="message-input" [(ngModel)]="message" name="message" placeholder="Type a message" required>
+      <button [disabled]="!message">Send</button>
+    </form>
+  </div>
+</div>

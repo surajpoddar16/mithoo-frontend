@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { SocketService } from '../../service/socket.service';
 import { StorageService } from '../../service/storage.service';
@@ -22,8 +22,11 @@ export class ChatContactListComponent implements OnInit, OnDestroy {
   messageSubscription: any;
   searchString: string;
   searchedFriends: any[] = [];
-
   searchTerms: Subject<string> = new Subject<string>();
+  activeItemId: any;
+
+  @Output()
+  select: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private userService: UserService,
@@ -45,19 +48,28 @@ export class ChatContactListComponent implements OnInit, OnDestroy {
 
     this.messageSubscription = this.socketService.getMessage()
       .subscribe(function(data: any) {
-        console.log('LIST', data);
         self.updateChatListFromIncoming(data);
       });
   }
 
   updateChatListFromIncoming(data: any) {
-    this.chatList.push({
-      friendId: data.sender.uuid,
-      friendAvatar: data.sender.avatar,
-      message: data.message,
-      date: data.date,
-      seen: data.seen
+    var existingChat = this.chatList.find(function(chat) {
+      return chat.friendId == data.sender.uuid;
     });
+
+    if (existingChat) {
+      existingChat.date = data.date;
+      existingChat.seen = this.activeItemId == data.sender.uuid ? 1 : data.seen;
+      existingChat.message = data.message;
+    } else {
+      this.chatList.push({
+        friendId: data.sender.uuid,
+        friendAvatar: data.sender.avatar,
+        message: data.message,
+        date: data.date,
+        seen: this.activeItemId == data.sender.uuid ? 1 : data.seen
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -84,5 +96,28 @@ export class ChatContactListComponent implements OnInit, OnDestroy {
       }).subscribe(function(result) {
           self.searchedFriends = result;
       });
+  }
+
+  openChat(friendId: any) {
+    var item = this.chatList.find(function (item) {
+      return item.friendId === friendId;
+    });
+
+    item.seen = 1;
+
+    this.activeItemId = friendId;
+
+    this.storageService.updateSeen(friendId);
+    this.select.emit(item);
+  }
+
+  startNewChat(friendId: any) {
+    this.searchString = undefined;
+    this.activeItemId = undefined;
+
+    var friend = this.searchedFriends.find(function(friend) {
+      return friend.uuid === friendId;
+    })
+    this.select.emit(friend);
   }
 }

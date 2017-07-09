@@ -9,6 +9,7 @@ import { StorageService } from '../service/storage.service';
 })
 export class MessengerComponent implements OnInit, OnDestroy {
   messageSubscription: any;
+  activeChat: any;
 
   constructor(
     private socketService: SocketService,
@@ -33,12 +34,15 @@ export class MessengerComponent implements OnInit, OnDestroy {
 
     this.messageSubscription = this.socketService.getMessage()
       .subscribe(function(data) {
-        console.log('MESSENGER', data);
         self.storageService.saveIncomingChatData(data);
       });
   }
 
   ngOnDestroy() {
     this.messageSubscription.unsubscribe();
+  }
+
+  setActiveChatPane(friend: any) {
+    this.activeChat = friend;
   }
 }

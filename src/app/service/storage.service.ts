@@ -26,6 +26,8 @@ export class StorageService {
       this.chatHistory[chatData.sender.uuid].messages = [chatData];
     }
 
+    console.log(this.chatHistory);
+
     localStorage.setItem('chat_history', JSON.stringify(this.chatHistory));
   }
 
@@ -66,5 +68,17 @@ export class StorageService {
     }
 
     return chatList;
+  }
+
+  updateSeen(id: any) {
+    this.chatHistory[id].messages.forEach(function(item: any) {
+      item.seen = 1;
+    });
+
+    localStorage.setItem('chat_history', JSON.stringify(this.chatHistory));
+  }
+
+  getChatFromId(id: any) {
+    return this.chatHistory[id] ? this.chatHistory[id].messages : [];
   }
 }
