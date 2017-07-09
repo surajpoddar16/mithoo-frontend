@@ -1,13 +1,11 @@
 {
-  "name": "angular_jit_aot_universal",
+  "name": "mithoo-frontend",
   "version": "1.0.0",
-  "description": "A webpack starter for Angular 4 with jit, aot and universal compilation",
+  "description": "Real time messaging application based on node and angular",
   "scripts": {
     "start": "webpack-dev-server --inline --progress --port 8080",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
-    "build:aot": "rimraf dist && webpack --config config/webpack-aot.prod.js --progress --profile --bail",
-    "build:uni": "rimraf dist && webpack --config config/webpack-uni.prod.js",
-    "serve:uni": "node dist/server.js"
+    "build:aot": "rimraf dist && webpack --config config/webpack-aot.prod.js --progress --profile --bail"
   },
   "license": "MIT",
   "dependencies": {
