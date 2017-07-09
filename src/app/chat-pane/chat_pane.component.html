@@ -1,5 +1,5 @@
-<div class="chat-pane-container" *ngIf="contactData">
-  <header>
+<div class="chat-pane-container">
+  <header *ngIf="contactData">
     <div><img class="contact-image" [src]="sanitize(contactData.avatar.profileImage)"></div>
     <div class="contact-detail">
       <div class="contact-name">{{ contactData.avatar.name }}</div>
@@ -19,10 +19,17 @@
       </div>
     </div>
   </div>
-  <div class="input-area">
-    <form (ngSubmit)="sendMessage()" name="new-message-form">
-      <input type="text" class="message-input" [(ngModel)]="message" name="message" placeholder="Type a message" required>
-      <button [disabled]="!message">Send</button>
-    </form>
+  <div class="input-area" *ngIf="contactData">
+    <div class="new-message-form">
+      <input
+        type="text"
+        class="message-input"
+        [(ngModel)]="message"
+        name="message"
+        placeholder="Type a message"
+        (keyup)="onMessageInputKeyUp($event)"
+        required>
+      <button [disabled]="!message" (click)="sendMessage()">Send</button>
+    </div>
   </div>
 </div>

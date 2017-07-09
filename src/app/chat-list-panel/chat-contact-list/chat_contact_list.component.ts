@@ -94,7 +94,9 @@ export class ChatContactListComponent implements OnInit, OnDestroy {
           ? self.userService.getFriendsList(term)
           : Observable.of<any[]>([])
       }).subscribe(function(result) {
-          self.searchedFriends = result;
+          self.searchedFriends = result.filter(function(item: any) {
+            return self.chatList.findIndex((chatItem: any) => chatItem.friendId == item.uuid ) === -1;
+          });
       });
   }
 
@@ -106,6 +108,7 @@ export class ChatContactListComponent implements OnInit, OnDestroy {
     item.seen = 1;
 
     this.activeItemId = friendId;
+    this.searchString = undefined;
 
     this.storageService.updateSeen(friendId);
     this.select.emit(item);
@@ -113,7 +116,7 @@ export class ChatContactListComponent implements OnInit, OnDestroy {
 
   startNewChat(friendId: any) {
     this.searchString = undefined;
-    this.activeItemId = undefined;
+    this.activeItemId = friendId;
 
     var friend = this.searchedFriends.find(function(friend) {
       return friend.uuid === friendId;

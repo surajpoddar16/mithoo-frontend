@@ -79,6 +79,7 @@ export class StorageService {
   }
 
   getChatFromId(id: any) {
-    return this.chatHistory[id] ? this.chatHistory[id].messages : [];
+    var chats = this.chatHistory[id] ? this.chatHistory[id].messages : [];
+    return chats.slice();
   }
 }

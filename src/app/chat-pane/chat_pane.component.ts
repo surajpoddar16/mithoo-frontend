@@ -12,7 +12,7 @@ import { AppConfig } from '../service/app.config';
 export class ChatPaneComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('messageBox') private messageBox: ElementRef;
 
-  chatData: any[];
+  chatData: any[] = [];
   contactData: any;
 
   messageSubscription: any;
@@ -35,7 +35,7 @@ export class ChatPaneComponent implements OnInit, OnDestroy, AfterViewChecked {
       this.chatData = this.storageService.getChatFromId(typeof value.friendId === 'undefined' ?  value.uuid : value.friendId);
     }
   }
-  get categoryId(): string {
+  get activeChat(): any {
     return this._activeChat;
   }
 
@@ -53,10 +53,16 @@ export class ChatPaneComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   sendMessage() {
-    this.socketService.sendMessage({
+    var data = {
       recipient: this.contactData,
       message: this.message
-    });
+    };
+
+    this.socketService.sendMessage(data);
+
+    this.storageService.saveOutgoingChatData(data);
+    this.chatData.push(data);
+
     this.message = undefined;
   }
 
@@ -83,14 +89,14 @@ export class ChatPaneComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onMessage(data: any) {
-    console.log(this.chatData);
     this.chatData.push(data);
-    console.log(this.chatData);
+    this.isTyping = false;
+    clearTimeout(this.typingTimeout);
     this.storageService.updateSeen(data.sender.uuid);
   }
 
   isSenderFriend(item: any) {
-    return item.sender.uuid == this.contactData.uuid;
+    return item.sender && item.sender.uuid == this.contactData.uuid;
   }
 
   onTyping(data: any) {
@@ -115,7 +121,12 @@ export class ChatPaneComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   scrollToBottom() {
-    console.log(this.messageBox);
     this.messageBox.nativeElement.scrollTop = this.messageBox.nativeElement.scrollHeight;
+  }
+
+  onMessageInputKeyUp(e: any) {
+    if (e.keyCode === 13 && this.message) {
+      this.sendMessage();
+    }
   }
 }
